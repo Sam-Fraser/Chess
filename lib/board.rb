@@ -8,15 +8,7 @@ class Board
 
   #initialize board
   def initialize
-    @board = starting_board
-  end
-
-  #create starting board
-  def starting_board
-    board = create_board
-    board.each do |arr|
-      arr.each
-    end
+    @board = set_base_vals(create_board)
   end
 
   #create board
@@ -38,4 +30,5 @@ class Board
       i += 1
     end
   end
+
 end
