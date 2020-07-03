@@ -1,7 +1,7 @@
 #lib/symbols.rb
 
 module Symbols
-  symbols = {
+  SYMBOLS = {
     w_board: "\u{25A1}",
     w_king: "\u{2654}",
     w_queen: "\u{2655}",
@@ -17,5 +17,9 @@ module Symbols
     b_knight: "\u{265E}",
     b_pawn: "\u{265F}"
   }
-  
+
+  def get_symbol(key)
+    SYMBOLS[key.to_sym]
+  end
+
 end
