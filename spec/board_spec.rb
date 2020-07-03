@@ -20,4 +20,20 @@ describe Board do
       expect(game_board.flatten.all? { |v| v.is_a?(Hash) }).to be true
     end
   end
+
+  describe "#set_base_vals" do
+    before(:each) do
+      board = Board.new
+      @game_board = board.create_board
+      board.set_base_vals(@game_board)
+    end
+
+    it "will make the first spots base piece white" do
+      expect(@game_board[0][0][:base]).to eql "\u{25A0}"
+    end
+
+    it "will make the second rows first spots base piece black" do
+      expect(@game_board[1][0][:base]).to eql "\u{25A1}"
+    end
+  end
 end
