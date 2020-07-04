@@ -37,6 +37,17 @@ describe Board do
     end
   end
 
+  describe "#place_piece" do
+    before(:each) do
+      @board = Board.new
+    end
+
+    it "will place a piece on a specific space given an array" do
+      @board.place_piece([4,1], "\u{2658}")
+      expect(@board.board[4][1][:piece]).to eql "\u{2658}"
+    end
+  end
+
   describe "#valid_move?" do
     before(:each) do
       @board = Board.new
@@ -90,7 +101,6 @@ describe Board do
     8 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
           DISPLAY
           @board.board[0][0][:piece] = "\u{2654}"
-          puts @board.display_board 
           expect{ puts @board.display_board }.to output(DISPLAY2).to_stdout
     end
   end
