@@ -33,7 +33,7 @@ class Board
 
   #check if space to move to is a valid move
   def valid_move?(arr)
-    arr[0] < 0 && arr[0] > 7 && arr[1] < 0 && arr[1] > 7 && board[arr[0]][arr[1]][:piece].nil?
+    arr[0] > 0 && arr[0] < 7 && arr[1] > 0 && arr[1] < 7 && @board[arr[0]][arr[1]][:piece].nil?
   end
 
 end
