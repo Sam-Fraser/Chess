@@ -76,5 +76,22 @@ describe Board do
       puts @board.display_board 
       expect{ puts @board.display_board }.to output(DISPLAY).to_stdout
     end
+
+    it "will return a board with pieces in the right place" do
+      DISPLAY2 = <<~DISPLAY
+      a b c d e f g h 
+    1 \u{2654} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    2 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+    3 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    4 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+    5 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    6 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+    7 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    8 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+          DISPLAY
+          @board.board[0][0][:piece] = "\u{2654}"
+          puts @board.display_board 
+          expect{ puts @board.display_board }.to output(DISPLAY2).to_stdout
+    end
   end
 end
