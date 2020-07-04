@@ -46,7 +46,7 @@ class Board
     display = "  a b c d e f g h \n"
     @board.each_with_index do |arr, i|
       line = "#{i + 1} "
-      arr.each_with_index do |hash, j|
+      arr.each do |hash|
         hash[:piece].nil? ? line += "#{hash[:base]} " : line += "#{hash[:piece]} "
       end
       line += "\n"
