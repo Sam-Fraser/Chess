@@ -14,7 +14,7 @@ class Board
   #create board
   def create_board
     board = Array.new(8).map do |x|
-      Array.new(8).map { |x| {base: "", piece: ""} }
+      Array.new(8).map { |x| {base: nil, piece: nil} }
     end
     board
   end
