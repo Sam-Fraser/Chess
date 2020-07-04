@@ -36,4 +36,23 @@ describe Board do
       expect(@game_board[1][0][:base]).to eql "\u{25A1}"
     end
   end
+
+  describe "#valid_move?" do
+    before(:each) do
+      @board = Board.new
+    end
+
+    it "will return true if space to move is within bounds of board" do
+      expect(@board.valid_move?([4,3])).to be true
+    end
+
+    it "will return false if space to move is out of bounds of board" do
+      expect(@board.valid_move?([8,4])).to be false
+    end
+
+    it "will return false if space to move is occupied by another piece" do
+      @board.board[0][5][:piece] = @board.get_symbol("w_knight")
+      expect(@board.valid_move?([0,5])).to be false
+    end
+  end
 end
