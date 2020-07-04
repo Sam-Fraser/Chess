@@ -55,4 +55,26 @@ describe Board do
       expect(@board.valid_move?([0,5])).to be false
     end
   end
+
+  describe "#display_board" do
+    before(:each) do
+      @board = Board.new
+    end
+
+    it "will return a blank board without pieces" do
+    DISPLAY = <<-DISPLAY
+  a b c d e f g h 
+1 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+2 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+3 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+4 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+5 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+6 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+7 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+8 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+      DISPLAY
+      puts @board.display_board 
+      expect{ puts @board.display_board }.to output(DISPLAY).to_stdout
+    end
+  end
 end
