@@ -48,6 +48,18 @@ describe Board do
     end
   end
 
+  describe "#remove_piece" do
+    before(:each) do
+      @board = Board.new
+    end
+
+    it "will place a piece on a specific space given an array" do
+      @board.place_piece([4,1], "\u{2658}")
+      @board.remove_piece([4,1])
+      expect(@board.board[4][1][:piece]).to be nil
+    end
+  end
+
   describe "#valid_move?" do
     before(:each) do
       @board = Board.new
