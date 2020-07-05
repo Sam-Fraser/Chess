@@ -1,10 +1,12 @@
 #spec/piece_spec.rb
 require "./lib/piece.rb"
+require "./lib/board.rb"
 
 describe Piece do
 
   before(:each) do
-    @w_knight = Piece.new([0,1], "w_knight")
+    board = Board.new
+    @w_knight = Piece.new([0,1], "w_knight", board)
   end
 
   describe "#move" do
