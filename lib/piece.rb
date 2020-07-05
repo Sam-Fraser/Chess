@@ -17,7 +17,7 @@ class Piece
 
   #general move piece method
   def move(movement)
-    if @board.valid_move?(movement)
+    if @board.valid_move?(movement) || @board.valid_attack?(movement)
       @first_move = false
       @board.remove_piece(@current_position)
       @current_position = [@current_position[0] + movement[0], @current_position[1] + movement[1]]
