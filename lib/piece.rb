@@ -11,12 +11,15 @@ class Piece
     @current_position = starting_position
     @name = get_symbol(name)
     @board = board
+    @board.place_piece(@current_position, @name)
     @first_move = true
   end
 
   #general move piece method
   def move(movement)
-    @first_move = false
-    @current_position = [@current_position[0] + movement[0], @current_position[1] + movement[1]]
+    if @board.valid_move?(movement)
+      @first_move = false
+      @current_position = [@current_position[0] + movement[0], @current_position[1] + movement[1]]
+    end
   end
 end
