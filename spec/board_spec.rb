@@ -79,6 +79,21 @@ describe Board do
     end
   end
 
+  describe "#valid_attack?" do
+    before(:each) do
+      @board = Board.new
+      @board.place_piece([3,3], @board.get_symbol("w_knight"))
+    end
+    
+    it "will return false if space to move does not have another piece" do
+      expect(@board.valid_attack?([3,4])).to be false
+    end
+
+    it "will return true if space to move does have another piece" do
+      expect(@board.valid_attack?([3,3])).to be true
+    end
+  end
+
   describe "#flip_board" do
     before do
       @board = Board.new
