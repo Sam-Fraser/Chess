@@ -46,6 +46,14 @@ class Board
     arr[0] > 0 && arr[0] < 7 && arr[1] > 0 && arr[1] < 7 && @board[arr[0]][arr[1]][:piece].nil?
   end
 
+  #flips board
+  def flip_board
+    @board.each do |arr|
+      arr.reverse!
+    end
+    @board.reverse!
+  end
+
   #display board method for clean display in command line
   def display_board
     display = "  a b c d e f g h \n"
