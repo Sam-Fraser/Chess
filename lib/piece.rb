@@ -7,9 +7,10 @@ class Piece
   attr_reader :name, :current_position, :first_move
 
   #initialize with current_position, name, first_move boolean
-  def initialize(starting_position, name)
+  def initialize(starting_position, name, board)
     @current_position = starting_position
     @name = get_symbol(name)
+    @board = board
     @first_move = true
   end
 
