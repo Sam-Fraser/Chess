@@ -24,4 +24,9 @@ class Piece
       @board.place_piece(@current_position, @name)
     end
   end
+
+  #swap position method for turn changes
+  def swap_position
+    @current_position = [7 - @current_position[0], 7 - @current_position[1]]
+  end
 end
