@@ -79,6 +79,29 @@ describe Board do
     end
   end
 
+  describe "#flip_board" do
+    before do
+      @board = Board.new
+      @board.place_piece([0,0], @board.get_symbol("b_rook"))
+    end
+
+    it "will flip the board around" do
+      DISPLAY4 = <<~DISPLAY
+      a b c d e f g h 
+    1 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    2 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+    3 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    4 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+    5 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    6 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
+    7 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
+    8 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{2656} 
+      DISPLAY
+      @board.flip_board
+      expect{ puts @board.display_board }.to output(DISPLAY4).to_stdout
+    end
+  end
+
   describe "#display_board" do
     before(:each) do
       @board = Board.new
