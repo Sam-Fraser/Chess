@@ -12,7 +12,7 @@ describe Symbols do
     end
 
     it "will return the piece asked for" do
-      expect(@dummy_class.get_symbol("w_king")).to eql "\u{2654}"
+      expect(@dummy_class.get_symbol("w_king")).to eql "\u{265A}"
     end
   end
 end
