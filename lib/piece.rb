@@ -19,7 +19,9 @@ class Piece
   def move(movement)
     if @board.valid_move?(movement)
       @first_move = false
+      @board.remove_piece(@current_position)
       @current_position = [@current_position[0] + movement[0], @current_position[1] + movement[1]]
+      @board.place_piece(@current_position, @name)
     end
   end
 end
