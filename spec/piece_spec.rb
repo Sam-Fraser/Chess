@@ -36,4 +36,11 @@ describe Piece do
       expect{ puts @board.display_board }.to output(DISPLAY3).to_stdout
     end
   end
+
+  describe "#swap_position" do
+    it "will swap piece to the other side of the board" do
+      @w_knight.swap_position
+      expect(@w_knight.current_position).to eql [7,6]
+    end
+  end
 end
