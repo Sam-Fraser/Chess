@@ -43,5 +43,6 @@ class Rook < Piece
     possible_moves += get_possible_moves(@LEFT_MOVES)
     possible_moves += get_possible_moves(@UP_MOVES)
     possible_moves += get_possible_moves(@DOWN_MOVES)
+    possible_moves
   end
 end
