@@ -8,7 +8,7 @@ class Pawn < Piece
   ATTACKS = [[-1,1],[-1,-1]]
 
   #get possible moves
-  def get_possible_moves
+  def get_all_possible_moves
     possible_moves = Array.new
     if first_move
       INIT_MOVES.each do |arr|
