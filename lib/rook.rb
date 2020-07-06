@@ -36,5 +36,12 @@ class Rook < Piece
     possible_moves
   end
 
-  #
+  #get all possible moves method
+  def get_all_possible_moves
+    possible_moves = []
+    possible_moves += get_possible_moves(@RIGHT_MOVES)
+    possible_moves += get_possible_moves(@LEFT_MOVES)
+    possible_moves += get_possible_moves(@UP_MOVES)
+    possible_moves += get_possible_moves(@DOWN_MOVES)
+  end
 end
