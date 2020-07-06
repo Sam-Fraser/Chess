@@ -17,12 +17,14 @@ class Piece
 
   #general move piece method
   def move(movement)
-    if @board.valid_move?(movement) || @board.valid_attack?(movement)
+    possible_position = [@current_position[0] + movement[0], @current_position[1] + movement[1]]
+    if @board.valid_move?(possible_position) || @board.valid_attack?(possible_position)
       @first_move = false
       @board.remove_piece(@current_position)
-      @current_position = [@current_position[0] + movement[0], @current_position[1] + movement[1]]
+      @current_position = possible_position
       @board.place_piece(@current_position, @name)
     end
+    nil
   end
 
   #swap position method for turn changes
