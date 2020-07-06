@@ -3,7 +3,7 @@ require_relative "piece.rb"
 
 #rook class (subclass of piece)
 class Rook < Piece
-  attr_reader :LEFT_MOVES, :UP_MOVES, :DOWN_MOVES
+  attr_reader :RIGHT_MOVES, :LEFT_MOVES, :UP_MOVES, :DOWN_MOVES
 
   def initialize(starting_position, name, board)
     super
@@ -33,6 +33,7 @@ class Rook < Piece
         break
       end
     end
+    possible_moves
   end
 
   #
