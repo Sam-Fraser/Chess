@@ -3,13 +3,14 @@ require_relative "piece.rb"
 
 #bishop class (subclass of piece)
 class Bishop < Piece
+  attr_reader :UP_RIGHT_MOVES, :UP_LEFT_MOVES, :DOWN_RIGHT_MOVES, :DOWN_LEFT_MOVES
 
   def initialize(starting_position, name, board)
     super
     @UP_RIGHT_MOVES = up_right_moves
-    #@UP_LEFT_MOVES = @UP_RIGHT_MOVES.map { |arr| arr = [0, -arr[1]] }
-    #@DOWN_RIGHT_MOVES = @LEFT_MOVES.map { |arr| arr.reverse }
-    #@DOWN_LEFT_MOVES = @RIGHT_MOVES.map { |arr| arr.reverse }
+    @UP_LEFT_MOVES = @UP_RIGHT_MOVES.map { |arr| arr = [arr[0], -arr[1]] }
+    @DOWN_RIGHT_MOVES = @UP_LEFT_MOVES.map { |arr| arr.reverse }
+    @DOWN_LEFT_MOVES = @UP_RIGHT_MOVES.map { |arr| arr = [-arr[0], -arr[1]] }
   end
 
   #set_moves method
@@ -21,4 +22,7 @@ class Bishop < Piece
     end
     final_array.sort
   end
+
+  #get possible moves method (per direction)
+  
 end
