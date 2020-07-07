@@ -37,4 +37,13 @@ class Bishop < Piece
     possible_moves
   end
 
+  #get all possible moves method
+  def get_all_possible_moves
+    possible_moves = []
+    possible_moves += get_possible_moves(@UP_RIGHT_MOVES)
+    possible_moves += get_possible_moves(@UP_LEFT_MOVES)
+    possible_moves += get_possible_moves(@DOWN_RIGHT_MOVES)
+    possible_moves += get_possible_moves(@DOWN_LEFT_MOVES)
+    possible_moves
+  end
 end

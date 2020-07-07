@@ -38,4 +38,15 @@ describe Bishop do
       expect(@bishop.get_possible_moves(@bishop.UP_RIGHT_MOVES)).to eql [[-1, 1], [-2, 2], [-3, 3]]
     end
   end
+
+  describe "#get_all_possible_moves" do
+    it "will return all possible moves a bishop can do in any direction, given a certain board" do
+      @bishop2 = Bishop.new([3,3], "w_bishop", @board)
+      @board.place_piece([1,1], @board.get_symbol("w_king"))
+      @board.place_piece([5,5], @board.get_symbol("b_pawn"))
+      @board.place_piece([1,5], @board.get_symbol("b_rook"))
+      @board.place_piece([5,1], @board.get_symbol("b_pawn"))
+      expect(@bishop2.get_all_possible_moves).to eql [[-1, 1], [-2, 2], [-1, -1], [-2, -2], [1, 1], [2, 2], [1, -1], [2, -2]]
+    end
+  end
 end
