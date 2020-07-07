@@ -46,7 +46,6 @@ describe Rook do
       @board.place_piece([0,3], @board.get_symbol("b_pawn"))
       @board.place_piece([3,6], @board.get_symbol("b_rook"))
       @board.place_piece([3,1], @board.get_symbol("b_pawn"))
-      puts @board.display_board
       expect(@rook2.get_all_possible_moves).to eql [[0, 1], [0, 2], [0, 3], [0, -1], [0, -2], [-1, 0], [-2, 0], [-3, 0], [1, 0], [2, 0], [3, 0], [4, 0]]
     end
   end
