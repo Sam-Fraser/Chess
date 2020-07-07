@@ -7,9 +7,9 @@ class Bishop < Piece
   def initialize(starting_position, name, board)
     super
     @UP_RIGHT_MOVES = up_right_moves
-    @UP_LEFT_MOVES = @RIGHT_MOVES.map { |arr| arr = [0, -arr[1]] }
-    @DOWN_RIGHT_MOVES = @LEFT_MOVES.map { |arr| arr.reverse }
-    @DOWN_LEFT_MOVES = @RIGHT_MOVES.map { |arr| arr.reverse }
+    #@UP_LEFT_MOVES = @UP_RIGHT_MOVES.map { |arr| arr = [0, -arr[1]] }
+    #@DOWN_RIGHT_MOVES = @LEFT_MOVES.map { |arr| arr.reverse }
+    #@DOWN_LEFT_MOVES = @RIGHT_MOVES.map { |arr| arr.reverse }
   end
 
   #set_moves method
