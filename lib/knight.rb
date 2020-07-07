@@ -2,7 +2,7 @@
 require_relative "piece.rb"
 
 #knight class (subclass of piece)
-class Knight
+class Knight < Piece
   MOVES = [[2,1], [2,-1], [-2,1], [-2,-1], [1,2], [1,-2], [-1,2], [-1,-2]]
 
   #get all possible moves method
