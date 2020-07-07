@@ -1,7 +1,7 @@
 #lib/queen.rb
 require_relative "piece.rb"
 
-#rook class (subclass of piece)
+#queen class (subclass of piece)
 class Queen < Piece
   attr_reader :RIGHT_MOVES, :LEFT_MOVES, :UP_MOVES, :DOWN_MOVES
 
