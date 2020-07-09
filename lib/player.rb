@@ -60,12 +60,17 @@ class Player
     @opponent.pieces.select { |piece| piece.current_position == arr }.length == 1
   end
 
+  #get piece method (finds piece at certain spot)
+  def get_piece(arr)
+    piece_idx = @pieces.index { |piece| piece.current_position == arr}
+    pieces[piece_idx]
+  end
+
   #get move method, asks for move 
   def get_move
     puts "Type in your move"
-    puts "EX: d3 to d4 (include spaces)"
+    puts "EX: d3 to d4 (include spaces), or kingside/queenside castle"
     move = gets.chomp.split(" ")
-    move = [move[0], move[2]]
   end
 end
 

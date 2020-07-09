@@ -39,4 +39,11 @@ describe Player do
       expect(@player2.opponent_piece?([3,3])).to be false
     end
   end
+
+  describe "#get_piece" do
+    it "will return the piece at a certain spot on the board" do
+      knight = @player1.get_piece([7,1])
+      expect(knight.is_a?(Knight)).to be true
+    end
+  end
 end
