@@ -1,5 +1,6 @@
 #spec/board_spec.rb
 require "./lib/board.rb"
+require "./lib/piece.rb"
 
 describe Board do
   describe "#create_board" do
@@ -97,7 +98,7 @@ describe Board do
   describe "#flip_board" do
     before do
       @board = Board.new
-      @board.place_piece([0,0], @board.get_symbol("b_rook"))
+      @rook = Piece.new([0,0], "b_rook", @board)
     end
 
     it "will flip the board around" do
@@ -150,7 +151,7 @@ describe Board do
     7 \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} 
     8 \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} \u{25A1} \u{25A0} 
           DISPLAY
-          @board.board[0][0][:piece] = "\u{2654}"
+          king = Piece.new([0,0], "b_king", @board)
           expect{ puts @board.display_board }.to output(DISPLAY2).to_stdout
     end
   end

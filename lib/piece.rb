@@ -1,5 +1,6 @@
 #lib/piece.rb
 require_relative "symbols.rb"
+require_relative "board.rb"
 
 #parent class for all pieces
 class Piece
@@ -11,8 +12,8 @@ class Piece
     @current_position = starting_position
     @name = get_symbol(name)
     @board = board
-    @board.place_piece(@current_position, @name)
     @first_move = true
+    @board.place_piece(@current_position, self)
   end
 
   #general move piece method
@@ -22,7 +23,7 @@ class Piece
       @first_move = false
       @board.remove_piece(@current_position)
       @current_position = possible_position
-      @board.place_piece(@current_position, @name)
+      @board.place_piece(@current_position, self)
     end
     nil
   end
@@ -32,3 +33,9 @@ class Piece
     @current_position = [7 - @current_position[0], 7 - @current_position[1]]
   end
 end
+
+board = Board.new
+piece = Piece.new([7,1], "w_queen", board)
+puts board.board[7][1][:piece].name
+puts piece
+puts board.display_board
