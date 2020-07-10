@@ -33,9 +33,3 @@ class Piece
     @current_position = [7 - @current_position[0], 7 - @current_position[1]]
   end
 end
-
-board = Board.new
-piece = Piece.new([7,1], "w_queen", board)
-puts board.board[7][1][:piece].name
-puts piece
-puts board.display_board

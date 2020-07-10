@@ -46,4 +46,4 @@ describe Player do
       expect(knight.is_a?(Knight)).to be true
     end
   end
-end
+end 
