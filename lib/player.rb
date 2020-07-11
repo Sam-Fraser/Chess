@@ -3,6 +3,7 @@ Dir["./lib/*.rb"].each { |file| require file unless file == "./lib/player.rb" }
 
 #player class
 class Player
+  include Spaces
   attr_accessor :pieces, :board, :opponent
 
   #initialize with color, pieces array, board, opponent
@@ -65,9 +66,29 @@ class Player
 
   #get move method, asks for move 
   def get_move
-    puts "Type in your move"
-    puts "EX: d3 to d4 (include spaces), or kingside/queenside castle"
-    move = gets.chomp.split(" ")
+    loop do
+      puts "Type in your move"
+      puts "EX: d3 to d4 (include spaces), or kingside/queenside castle"
+      move = gets.chomp.downcase.split(" ")
+      if move.include?("castle")
+        if move.include?("kingside") 
+          self.kingside_castle ? break : next
+        elsif move.include?("queenside")
+          self.queenside_castle ? break : next
+        end
+      else
+        move = [get_space(move[0]), get_space(move[2])]
+        piece = nil
+        @board.valid_attack?(move[0]) ? piece = self.get_piece(move[0]) : next
+        pieces.value?(piece) ? movement = [move[1][0] - piece.current_position[0], move[1][1] - piece.current_position[1]] : next
+        if piece.get_all_possible_moves.include?(movement) && (self.opponent_piece?(move[1]) || @board.valid_move?(move[1]))
+          piece.move(movement)
+          break
+        else
+          puts "You can't move there"
+        end
+      end
+    end
   end
 
   #kingside castle method 
@@ -75,12 +96,14 @@ class Player
     if @color == "white" && @pieces[:king].first_move && @pieces[:k_rook].first_move && @board.board[7][5][:piece].nil? && @board.board[7][6][:piece].nil?
       @pieces[:king].move([0,2])
       @pieces[:k_rook].move([0,-2])
+      true
     elsif @color == "black" && @pieces[:king].first_move && @pieces[:k_rook].first_move && @board.board[7][2][:piece].nil? && @board.board[7][1][:piece].nil?
       @pieces[:king].move([0,-2])
       @pieces[:k_rook].move([0,2])
+      true
     else
       puts "You cannot castle now"
-      get_move
+      false
     end
   end
 
@@ -89,13 +112,14 @@ class Player
     if @color == "white" && @pieces[:king].first_move && @pieces[:q_rook].first_move && @board.board[7][1][:piece].nil? && @board.board[7][2][:piece].nil? && @board.board[7][3][:piece].nil?
       @pieces[:king].move([0,-2])
       @pieces[:q_rook].move([0,3])
+      true
     elsif @color == "black" && @pieces[:king].first_move && @pieces[:q_rook].first_move && @board.board[7][4][:piece].nil? && @board.board[7][5][:piece].nil? && @board.board[7][6][:piece].nil?
       @pieces[:king].move([0,2])
       @pieces[:q_rook].move([0,-3])
+      true
     else
       puts "You cannot castle now"
-      get_move
+      false
     end
   end
 end
-

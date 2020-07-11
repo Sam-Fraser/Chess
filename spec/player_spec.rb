@@ -86,4 +86,21 @@ describe Player do
       expect(@player2.pieces[:king].current_position).to eql([7,5])
     end
   end
+
+  describe "#get_move" do
+    it "will prompt the user to input a move" do
+      ASK = <<~ASK
+      Type in your move
+      EX: d3 to d4 (include spaces), or kingside/queenside castle
+      ASK
+      allow_any_instance_of(Player).to receive(:gets).and_return('d7 to d5')
+      expect{ @player1.get_move }.to output(ASK).to_stdout
+    end
+
+    it "will move a piece to a specified space" do
+      allow_any_instance_of(Player).to receive(:gets).and_return('d7 to d5')
+      @player1.get_move
+      expect(@player1.pieces[:pawn3].current_position).to eql([4,3])
+    end
+  end
 end 
