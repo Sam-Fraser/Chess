@@ -69,5 +69,33 @@ class Player
     puts "EX: d3 to d4 (include spaces), or kingside/queenside castle"
     move = gets.chomp.split(" ")
   end
+
+  #kingside castle method 
+  def kingside_castle
+    if @color == "white" && @pieces[:king].first_move && @pieces[:k_rook].first_move && @board.board[7][5][:piece].nil? && @board.board[7][6][:piece].nil?
+      @pieces[:king].move([0,2])
+      @pieces[:k_rook].move([0,-2])
+    elsif @color == "black" && @pieces[:king].first_move && @pieces[:k_rook].first_move && @board.board[7][2][:piece].nil? && @board.board[7][1][:piece].nil?
+      @pieces[:king].move([0,-2])
+      @pieces[:k_rook].move([0,2])
+    else
+      puts "You cannot castle now"
+      get_move
+    end
+  end
+
+  #queenside castle method 
+  def queenside_castle
+    if @color == "white" && @pieces[:king].first_move && @pieces[:q_rook].first_move && @board.board[7][1][:piece].nil? && @board.board[7][2][:piece].nil? && @board.board[7][3][:piece].nil?
+      @pieces[:king].move([0,-2])
+      @pieces[:q_rook].move([0,3])
+    elsif @color == "black" && @pieces[:king].first_move && @pieces[:q_rook].first_move && @board.board[7][4][:piece].nil? && @board.board[7][5][:piece].nil? && @board.board[7][6][:piece].nil?
+      @pieces[:king].move([0,2])
+      @pieces[:q_rook].move([0,-3])
+    else
+      puts "You cannot castle now"
+      get_move
+    end
+  end
 end
 

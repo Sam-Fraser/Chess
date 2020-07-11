@@ -46,4 +46,44 @@ describe Player do
       expect(knight.is_a?(Knight)).to be true
     end
   end
+
+  describe "#kingside_castle" do
+    it "will move the white king and kingside rook to the correct places" do
+      @player1.pieces[:k_knight].move([-2,1])
+      @player1.pieces[:k_bishop].move([-2,0])
+      @player1.kingside_castle
+      expect(@player1.pieces[:king].current_position).to eql([7,6])
+    end
+
+    it "will move the black king and kingside rook to the correct places" do
+      @board.flip_board
+      @player2.flip_pieces
+      @player1.flip_pieces
+      @player2.pieces[:k_knight].move([-2,-1])
+      @player2.pieces[:k_bishop].move([-2,0])
+      @player2.kingside_castle
+      expect(@player2.pieces[:king].current_position).to eql([7,1])
+    end
+  end
+
+  describe "#queenside_castle" do
+    it "will move the white king and queensside rook to the correct places" do
+      @player1.pieces[:q_knight].move([-2,-1])
+      @player1.pieces[:q_bishop].move([-2,0])
+      @player1.pieces[:queen].move([-3,0])
+      @player1.queenside_castle
+      expect(@player1.pieces[:king].current_position).to eql([7,2])
+    end
+
+    it "will move the black king and kingside rook to the correct places" do
+      @board.flip_board
+      @player2.flip_pieces
+      @player1.flip_pieces
+      @player2.pieces[:q_knight].move([-2,1])
+      @player2.pieces[:q_bishop].move([-2,0])
+      @player2.pieces[:queen].move([-3,0])
+      @player2.queenside_castle
+      expect(@player2.pieces[:king].current_position).to eql([7,5])
+    end
+  end
 end 
