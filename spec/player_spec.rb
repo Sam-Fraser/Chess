@@ -103,4 +103,44 @@ describe Player do
       expect(@player1.pieces[:pawn3].current_position).to eql([4,3])
     end
   end
+
+  describe "#promotion" do
+    it "will prompt the user to input a promotion" do
+      ASK2 = <<~ASK
+        What would you like to promote your pawn to?
+        Type the full name: (knight, rook, bishop, queen)
+      ASK
+      allow_any_instance_of(Player).to receive(:gets).and_return("queen")
+      @player1.pieces[:pawn3].move([-6,0])
+      expect{ @player1.promotion(@player1.pieces[:pawn3]) }.to output(ASK2).to_stdout
+    end
+
+    it "will convert the pawn to a queen when 'queen' is input" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("queen")
+      @player1.pieces[:pawn3].move([-6,0])
+      @player1.promotion(@player1.pieces[:pawn3])
+      expect(@player1.pieces[:pawn3].is_a?(Queen)).to be true
+    end
+
+    it "will convert the pawn to a knight when 'knight' is input" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("knight")
+      @player1.pieces[:pawn3].move([-6,0])
+      @player1.promotion(@player1.pieces[:pawn3])
+      expect(@player1.pieces[:pawn3].is_a?(Knight)).to be true
+    end
+
+    it "will convert the pawn to a rook when 'rook' is input" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("rook")
+      @player1.pieces[:pawn3].move([-6,0])
+      @player1.promotion(@player1.pieces[:pawn3])
+      expect(@player1.pieces[:pawn3].is_a?(Rook)).to be true
+    end
+
+    it "will convert the pawn to a bishop when 'bishop' is input" do
+      allow_any_instance_of(Player).to receive(:gets).and_return("bishop")
+      @player1.pieces[:pawn3].move([-6,0])
+      @player1.promotion(@player1.pieces[:pawn3])
+      expect(@player1.pieces[:pawn3].is_a?(Bishop)).to be true
+    end
+  end
 end 

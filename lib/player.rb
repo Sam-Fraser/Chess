@@ -83,6 +83,7 @@ class Player
         pieces.value?(piece) ? movement = [move[1][0] - piece.current_position[0], move[1][1] - piece.current_position[1]] : next
         if piece.get_all_possible_moves.include?(movement) && (self.opponent_piece?(move[1]) || @board.valid_move?(move[1]))
           piece.move(movement)
+          promotion(piece)
           break
         else
           puts "You can't move there"
@@ -120,6 +121,34 @@ class Player
     else
       puts "You cannot castle now"
       false
+    end
+  end
+
+  #promotion class for pawns
+  def promotion(piece)
+    if piece.is_a?(Pawn) && piece.current_position[0] == 0 
+      loop do
+        puts "What would you like to promote your pawn to?"
+        puts "Type the full name: (knight, rook, bishop, queen)"
+        promoted_to = gets.chomp.downcase
+        case promoted_to
+        when "queen"
+          pieces[pieces.key(piece)] = Queen.new(piece.current_position, "#{@color[0]}_queen", @board)
+          break
+        when "knight"
+          pieces[pieces.key(piece)] = Knight.new(piece.current_position, "#{@color[0]}_queen", @board)
+          break
+        when "rook"
+          pieces[pieces.key(piece)] = Rook.new(piece.current_position, "#{@color[0]}_queen", @board)
+          break
+        when "bishop"
+          pieces[pieces.key(piece)] = Bishop.new(piece.current_position, "#{@color[0]}_queen", @board)
+          break
+        else
+          puts "that is not a valid selection"
+          next
+        end
+      end
     end
   end
 end
