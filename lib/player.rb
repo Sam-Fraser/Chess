@@ -81,12 +81,32 @@ class Player
         piece = nil
         @board.valid_attack?(move[0]) ? piece = self.get_piece(move[0]) : next
         pieces.value?(piece) ? movement = [move[1][0] - piece.current_position[0], move[1][1] - piece.current_position[1]] : next
-        if piece.get_all_possible_moves.include?(movement) && (self.opponent_piece?(move[1]) || @board.valid_move?(move[1]))
+        if piece.is_a?(King) && results_in_check?(movement)
+          puts "You can't move there"
+          next
+        elsif piece.get_all_possible_moves.include?(movement) && @board.valid_move?(move[1])
           piece.move(movement)
+          if @opponent.check?
+            piece.move([-movement[0], -movement[1]])
+            puts "You can't move there"
+            next
+          end
+          promotion(piece)
+          break
+        elsif piece.get_all_possible_moves.include?(movement) && self.opponent_piece?(move[1])
+          og_piece = @board.board[move[1][0]][move[1][1]][:piece]
+          piece.move(movement)
+          if @opponent.check?
+            piece.move([-movement[0], -movement[1]])
+            @board.place_piece(move[1], og_piece)
+            puts "You can't move there"
+            next
+          end
           promotion(piece)
           break
         else
           puts "You can't move there"
+          next
         end
       end
     end

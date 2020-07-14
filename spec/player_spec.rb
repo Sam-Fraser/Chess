@@ -102,6 +102,13 @@ describe Player do
       @player1.get_move
       expect(@player1.pieces[:pawn3].current_position).to eql([4,3])
     end
+
+    it "will move a piece to an attacking spot" do
+      allow_any_instance_of(Player).to receive(:gets).and_return('g7 to h6')
+      @player2.pieces[:q_bishop].move([5,5])
+      @player1.get_move
+      expect(@player1.pieces[:pawn6].current_position).to eql([5,7])
+    end
   end
 
   describe "#promotion" do
