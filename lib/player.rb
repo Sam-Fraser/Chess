@@ -70,7 +70,7 @@ class Player
       puts "Type in your move"
       puts "EX: d3 to d4 (include spaces), or kingside/queenside castle"
       move = gets.chomp.downcase.split(" ")
-      if move.include?("castle")
+      if move.include?("castle") 
         if move.include?("kingside") 
           self.kingside_castle ? break : next
         elsif move.include?("queenside")
@@ -95,11 +95,11 @@ class Player
   #kingside castle method 
   def kingside_castle
     if @color == "white" && @pieces[:king].first_move && @pieces[:k_rook].first_move && @board.board[7][5][:piece].nil? && @board.board[7][6][:piece].nil?
-      @pieces[:king].move([0,2])
+      results_in_check?([0,2]) ? false : @pieces[:king].move([0,2])
       @pieces[:k_rook].move([0,-2])
       true
     elsif @color == "black" && @pieces[:king].first_move && @pieces[:k_rook].first_move && @board.board[7][2][:piece].nil? && @board.board[7][1][:piece].nil?
-      @pieces[:king].move([0,-2])
+      results_in_check?([0,2]) ? false : @pieces[:king].move([0,-2])
       @pieces[:k_rook].move([0,2])
       true
     else
@@ -149,6 +149,40 @@ class Player
           next
         end
       end
+    end
+  end
+
+  #returns true if opponent is in check
+  def check?
+    opponent_king = @opponent.pieces[:king]
+    attackers = @pieces.select do |piece|
+      @pieces[piece].get_all_possible_moves.any? do |move|        
+        [@pieces[piece].current_position[0] + move[0], @pieces[piece].current_position[1] + move[1]] == opponent_king.current_position
+      end
+    end
+    !attackers.empty?
+  end
+
+  #returns true if move will result in check
+  def results_in_check?(move)
+    king = @pieces[:king]
+    potential_pos = [king.current_position[0] + move[0], king.current_position[1] + move[1]]
+    attackers = @opponent.pieces.select do |piece|
+      @opponent.pieces[piece].get_all_possible_moves.any? do |move|        
+        [@opponent.pieces[piece].current_position[0] + move[0], @opponent.pieces[piece].current_position[1] + move[1]] == potential_pos
+      end
+    end
+    !attackers.empty?
+  end
+
+  #returns true if opponent is in check mate
+  def check_mate?
+    opponent_king = @opponent.pieces[:king]
+    king_moves = opponent_king.get_all_possible_moves
+    if check? && king_moves.all? { |moves| results_in_check(move) }
+      true
+    else
+      false
     end
   end
 end

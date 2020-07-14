@@ -143,4 +143,25 @@ describe Player do
       expect(@player1.pieces[:pawn3].is_a?(Bishop)).to be true
     end
   end
+
+  describe "#check?" do
+    it "will return false if the opponent king is not in check" do
+      expect(@player2.check?).to be false
+    end
+
+    it "will return true if the opponent king is in check" do
+      @player2.pieces[:king].move([6,0])
+      expect(@player1.check?).to be true
+    end
+  end
+
+  describe "#results_in_check" do
+    it "will return true if a move by the king will result in check" do
+      expect(@player1.results_in_check?([-6,0])).to be true
+    end
+
+    it "will return false if a move by the king will not result in check" do
+      expect(@player1.results_in_check?([-5,0])).to be false
+    end
+  end
 end 
