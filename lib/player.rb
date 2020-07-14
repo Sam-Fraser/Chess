@@ -99,7 +99,7 @@ class Player
       @pieces[:k_rook].move([0,-2])
       true
     elsif @color == "black" && @pieces[:king].first_move && @pieces[:k_rook].first_move && @board.board[7][2][:piece].nil? && @board.board[7][1][:piece].nil?
-      results_in_check?([0,2]) ? false : @pieces[:king].move([0,-2])
+      results_in_check?([0,-2]) ? false : @pieces[:king].move([0,-2])
       @pieces[:k_rook].move([0,2])
       true
     else
@@ -111,11 +111,11 @@ class Player
   #queenside castle method 
   def queenside_castle
     if @color == "white" && @pieces[:king].first_move && @pieces[:q_rook].first_move && @board.board[7][1][:piece].nil? && @board.board[7][2][:piece].nil? && @board.board[7][3][:piece].nil?
-      @pieces[:king].move([0,-2])
+      results_in_check?([0,-2]) ? false : @pieces[:king].move([0,-2])
       @pieces[:q_rook].move([0,3])
       true
     elsif @color == "black" && @pieces[:king].first_move && @pieces[:q_rook].first_move && @board.board[7][4][:piece].nil? && @board.board[7][5][:piece].nil? && @board.board[7][6][:piece].nil?
-      @pieces[:king].move([0,2])
+      results_in_check?([0,2]) ? false : @pieces[:king].move([0,2])
       @pieces[:q_rook].move([0,-3])
       true
     else
