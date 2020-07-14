@@ -197,10 +197,38 @@ class Player
 
   #returns true if opponent is in check mate
   def check_mate?
-    opponent_king = @opponent.pieces[:king]
-    king_moves = opponent_king.get_all_possible_moves
-    if check? && king_moves.all? { |moves| results_in_check(move) }
-      true
+    if self.check?
+      possible_movers = []
+      @opponent.pieces.each_value do |piece|
+        piece.get_all_possible_moves.each do |move|
+          possible_pos = [piece.current_position[0] + move[0], piece.current_position[1] + move[1]]
+          if @board.valid_move?(possible_pos)
+            piece.move(move)
+            if self.check?
+              piece.move([-move[0], -move[1]])
+              next
+            else
+              piece.move([-move[0], -move[1]])
+              possible_movers.push(piece)
+              break
+            end
+          elsif @opponent.opponent_piece?(possible_pos)
+            og_piece = @board.board[possible_pos[0]][possible_pos[1]][:piece]
+            piece.move(move)
+            if self.check?
+              piece.move([-move[0], -move[1]])
+              @board.place_piece(possible_pos, og_piece)
+              next
+            else
+              piece.move([-move[0], -move[1]])
+              @board.place_piece(possible_pos, og_piece)
+              possible_movers.push(piece)
+              break
+            end
+          end
+        end
+      end
+      possible_movers.length == 0
     else
       false
     end

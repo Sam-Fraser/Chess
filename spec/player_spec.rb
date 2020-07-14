@@ -171,4 +171,22 @@ describe Player do
       expect(@player1.results_in_check?([-5,0])).to be false
     end
   end
+
+  describe "#check_mate" do
+    it "will return false if opponent is not in check mate" do
+      expect(@player1.check_mate?).to be false
+    end
+
+    it "will return false if opponent can get out of check" do
+      @player1.pieces[:pawn3].move([-2,0])
+      @player2.pieces[:queen].move([3,-3])
+      expect(@player2.check_mate?).to be false
+    end
+
+    it "will return true if the opponent is in check mate" do
+      @player2.pieces[:king].move([5,0])
+      @player1.pieces[:queen].move([-3,-3])
+      expect(@player1.check_mate?).to be true
+    end
+  end
 end 

@@ -30,3 +30,10 @@ class Game
     end
   end
 end
+
+#new_game = Game.new
+#10.times do 
+#  puts new_game.board.display_board
+#  new_game.current_player.get_move
+#  new_game.switch_turns
+#end
