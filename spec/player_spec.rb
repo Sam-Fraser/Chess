@@ -189,4 +189,26 @@ describe Player do
       expect(@player1.check_mate?).to be true
     end
   end
-end 
+
+  describe "#stale_mate" do
+    it "will return false if opponent is not in stale mate" do
+      expect(@player1.stale_mate?).to be false
+    end
+
+    it "will return true if opponent cannot move without being in check" do
+      @player1.pieces[:king].move([-3,0])
+      @player2.pieces[:queen].move([3,-3])
+      @player2.pieces[:q_rook].move([5,0])
+      @player2.pieces[:q_knight].move([2,1])
+      @player2.pieces[:k_knight].move([2,0])
+      puts @board.display_board
+      expect(@player2.stale_mate?).to be true
+    end
+
+    it "will return false if the opponent is in check mate" do
+      @player2.pieces[:king].move([5,0])
+      @player1.pieces[:queen].move([-3,-3])
+      expect(@player1.stale_mate?).to be false
+    end
+  end
+end -
